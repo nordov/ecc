@@ -1,0 +1,73 @@
+<div class="row border-bottom mt-4 mb-3">
+    <h1>Game Detail</h1>
+</div>
+
+
+
+
+
+<div class="row mb-3">
+    <div class="accordion" id="accordionExample">
+    <div class="accordion-item">
+        <h2 class="accordion-header" id="headingOne">
+        <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+            <% if user_signed_in? && current_user == @game.publisher %> 
+                Game Record Actions
+            <% else %>
+            Publisher Details
+            <% end %>
+        </button>
+        </h2>
+        <div id="collapseOne" class="accordion-collapse collapse show" aria-labelledby="headingOne" data-bs-parent="#accordionExample">
+        <div class="accordion-body">
+            <% if user_signed_in? && current_user == @game.publisher %> 
+            <ul class="nav justify-content-center">
+                <li class="nav-item">
+                        <%= link_to edit_game_path, class: "nav-link" do %>
+                        <i class="fa-solid fa-pen-to-square"></i> Edit
+                        <% end %>
+                </li>
+                <li class="nav-item">
+                    <%= link_to game_path, method: :delete, data: { confirm: "Are you sure?" }, class: "nav-link" do %>
+                    <i class="fa-solid fa-trash"></i> Delete
+                    <% end %>
+                </li>
+            </ul>
+            <% else %>
+            <span>Name:</span><%= @game.publisher.name %><br>
+            <span>Email:</span><%= @game.publisher.email %><br>
+            <span>Registered games:<%= @game.publisher.registered_games %></span>
+            <% end %>
+        </div>
+        </div>
+    </div>
+    </div>
+</div>
+
+
+<div class="card col-md-6 m-auto">
+    <div class="row">
+        <div class="col-5">
+            <image class="img-fluid rounded-start m-0" src="<%= asset_path(@game.image) %>">
+        </div>
+        <div class="col-7 pt-4 ps-0 d-flex flex-column text-nowrap">
+            <span class="fw-bold text-truncate">
+                <%= @game.name %>
+            </span>
+            <span class="text-truncate">
+                Nickname:
+                <%= @game.nickname %>
+            </span>
+            <div class="row mt-2">
+                <span class="col-4">
+                    <i class="fa-solid fa-thumbs-up"></i>
+                    <%= @game.likes %>
+                </span>
+                <span class="col-4">
+                    <i class="fa-solid fa-thumbs-down"></i>
+                    <%= @game.dislikes %>
+                </span>
+            </div>
+        </div>
+    </div>
+</div>

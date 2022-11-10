@@ -1,0 +1,19 @@
+<div class="row border-bottom mt-4 mb-3">
+    <h1>Login</h1>
+</div>
+
+<div class="row col-md-6 m-auto">
+  <form action="/users/sign_in" id="new_user" accept-charset="UTF-8" method="post">
+    <%= render "devise/shared/error_messages", resource: resource %>
+    <input name="authenticity_token" value="<%= form_authenticity_token %>" type="hidden">
+    <div class="form-floating mb-3">
+      <input type="email" class="form-control" id="user_email" name="user[email]">
+      <label for="user_email">Email</label>
+    </div>
+    <div class="form-floating mb-3">
+      <input type="password" class="form-control" id="user_password" name="user[password]">
+      <label for="user_email">Password</label>
+    </div>
+    <button type="submit" class="btn btn-primary">Submit</button>
+  </form>
+</div>

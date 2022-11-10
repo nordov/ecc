@@ -1,0 +1,56 @@
+<div class="row border-bottom mt-4 mb-3">
+    <% if current_page?(root_path) %>
+    <h1>Game Catalog</h1>
+    <% else %>
+    <h1>My Account</h1>
+    <% end %>
+</div>
+
+<% if ( @games.length == 0 ) then %>
+<div class="pt-5 text-center text-black-50">No games found...</div>
+<% else %>
+<div class="row row-cols-1 row-cols-md-3 g-4">
+<% @games.each do |game| %>
+    <div class="col">
+            <div class="card">
+                <div class="row">
+                    <div class="col-5">
+                        <image class="img-fluid rounded-start m-0" src="<%= asset_path(game.image) %>">
+                    </div>
+                    <div class="col-7 pt-4 ps-0 d-flex flex-column text-nowrap">
+                        <a href="<%= game_path(game.id) %>" >
+                            <div class="d-flex flex-column text-nowrap">
+                                <span class="fw-bold text-truncate">
+                                    <%= game.name %>
+                                </span>
+                                <span class="text-truncate">
+                                    Nickname:
+                                    <%= game.nickname %>
+                                </span>
+                                <span class="text-truncate">
+                                    Publisher:
+                                    <%= game.publisher.name %>
+                                </span>
+                            </div>
+                        </a>
+                        <div class="row mt-2">
+                            <span class="col-4">
+                                <%= link_to game_upvote_path( game.id ), method: :post do %>
+                                <i class="fa-solid fa-thumbs-up"></i>
+                                <%= game.likes %>
+                                <% end %>
+                            </span>
+                            <span class="col-4">
+                                <%= link_to game_downvote_path( game.id ), method: :post do %>
+                                <i class="fa-solid fa-thumbs-down"></i>
+                                <%= game.dislikes %>
+                                <% end %>
+                            </span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+    </div>
+  <% end %>
+</div>
+<% end %>

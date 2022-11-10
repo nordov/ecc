@@ -1,0 +1,19 @@
+<div class="row border-bottom mt-4 mb-3">
+    <h1>Edit Game</h1>
+</div>
+
+<div class="row col-md-6 m-auto">
+    <form action="/game/<%= @game.id %>" id="edit_game" method="post">
+        <input type="hidden" name="_method" value="put">
+        <input name="authenticity_token" value="<%= form_authenticity_token %>" type="hidden">
+        <div class="form-floating mb-3">
+            <input type="text" class="form-control" id="game_name" name="game[name]" value="<%= @game.name %>">
+            <label for="game_name">Game Name</label>
+        </div>
+        <div class="form-floating mb-3">
+            <input type="text" class="form-control" id="game_nickname" name="game[nickname]" value="<%= @game.nickname %>">
+            <label for="game_nickname">Game Nickname</label>
+        </div>
+        <button type="submit" class="btn btn-primary">Submit</button>
+    </form>
+</div>
